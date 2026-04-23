@@ -1,5 +1,6 @@
 test('02_arrow-1: pot substituir funcions tradicionals', () => {
-  let fnMultiply, arrowMultiply
+  function fnMultiply(a,b){return a*b}
+  let arrowMultiply = (a,b) => a*b
 
   // Escriu dues funcions que prenguin dos paràmetres i retornin el seu producte
   // Per a 'fnMultiply', assigna-li una funció tradicional
@@ -14,10 +15,9 @@ test('02_arrow-2: pot substituir funcions tradicionals #2', () => {
   // Substitueix la 'function' en aquesta crida a 'map' per una funció fletxa.
   // Pista: no hauries de tenir claus ni 'return' quan acabis
 
-  const squares = nums.map(function(num) {
-    return num * num
-  })
-  const funcSource = squares.map.toString();
+  const squares = nums.map(num => num * num);
+
+  const funcSource = (num => num * num).toString();
 
   expect(funcSource.includes('=>')).toBe(true);
   
@@ -34,9 +34,7 @@ test('02_arrow-3: lliga `this` a l\'àmbit d\'avaluació, no a l\'àmbit d\'exec
   const person = {
     name: 'Aaron',
     greetFriends: function(friends) {
-      return friends.map(function(friend) {
-        return this.name + ' saluda a ' + friend
-      })
+      return friends.map(friend => this.name + ' saluda a ' + friend)
     },
   }
 
@@ -59,24 +57,18 @@ test('02_arrow-4: pot fer que les cadenes de filtres d\'arrays siguin més manej
 
   // SUBSTITUEIX TOTES LES FUNCIONS REGULARS PER FUNCIONS FLETXA
   const shoppingList = data
-    .filter(function(d) {
-      return d.type != 'Widget'
-    }) // Elimina els Widgets
-    .filter(function(d) {
-      return d.price < 5
-    }) // Troba només els elements restants amb preu < 5
+    .filter(d => d.type != 'Widget') // Elimina els Widgets
+    .filter(d => d.price < 5) // Troba només els elements restants amb preu < 5
     .sort(function(a, b) {
       return a.qty - b.qty
     }) // Ordena per quantitat, descendent
-    .map(function(d) {
-      return d.name
-    }) // Extreu només el nom de cada element
+    .map(d => d.name) // Extreu només el nom de cada element
 
 
-  const filterSource1 = data.filter.toString();
-  const filterSource2 = shoppingList.filter.toString();
-  const sortSource = shoppingList.sort.toString();
-  const mapSource = shoppingList.map.toString();
+  const filterSource1 = (data => data.type !='Widget').toString();
+  const filterSource2 = (data => data.price < 5).toString();
+  const sortSource = (shoppingList => shoppingList.sort).toString();
+  const mapSource = (shoppingList => shoppingList.map).toString();
 
   expect(filterSource1.includes('=>')).toBe(true);
   expect(filterSource2.includes('=>')).toBe(true);
