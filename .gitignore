@@ -1,2 +1,19 @@
 pnpm-lock.yaml
 node-modules
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Environment Variables
+.env
+
+# Editor
+.vscode/
+.idea/
+
+# Dependencies
+node_modules/
