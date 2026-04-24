@@ -11,3 +11,7 @@ function square(num) {
 function diag(x, y) {
   return sqrt(square(x) + square(y))
 }
+
+export function add(x,y){
+  return x+y;
+}

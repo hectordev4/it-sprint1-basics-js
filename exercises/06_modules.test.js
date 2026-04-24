@@ -1,6 +1,11 @@
 import * as Mathy from '../common/Mathy'
 import * as IndexImport from '../common'
 // WRITE YOUR IMPORT STATEMENTS HERE
+import {sqrt as mySqrt, square as mySquare} from '../common/Mathy'
+import _ from 'lodash'
+import {add} from '../common/Mathy'
+import lodash from 'lodash'
+
 
 test('can import Mathy', () => {
   // this one's already done! You're welcome :)
@@ -11,6 +16,7 @@ test('can import Mathy', () => {
 
 test('06_modules-1: can specify what to import, to only retain pieces of the import', () => {
   // Import `Mathy` again, but pull out only the `sqrt` as mySqrt, and `square` as mySquare
+
   expect(mySqrt).toBeDefined()
   expect(mySquare).toBeDefined()
   expect(mySqrt).toBe(Mathy.sqrt)
@@ -41,8 +47,8 @@ test('06_modules-4: can import from my node_modules', () => {
 test.skip('Index import', () => {
   //I have noticed that using index.js is pretty common pattern
   //If someone has been confused about that maybe this helps
-  expect(IndexImport.variable1).toBe(/* ENTER YOUR GUESS HERE */)
-  expect(IndexImport.variable2).toBe(/* ENTER YOUR GUESS HERE */)
-  expect(IndexImport.variable3).toBe(/* ENTER YOUR GUESS HERE */)
-  expect(IndexImport.variable4).toBe(/* ENTER YOUR GUESS HERE */)
+  expect(IndexImport.variable1).toBe(/* ENTER YOUR GUESS HERE */'Bob')
+  expect(IndexImport.variable2).toBe(/* ENTER YOUR GUESS HERE */'Kent')
+  expect(IndexImport.variable3).toBe(/* ENTER YOUR GUESS HERE */222)
+  expect(IndexImport.variable4).toBe(/* ENTER YOUR GUESS HERE */false)
 })
