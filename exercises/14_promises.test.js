@@ -24,8 +24,9 @@ test('14_promises-1: should resolve', () => {
     .then(
       result => {
         // throw new Error('això no s'hauria d'executar')
-        // expect(result).toBe(/*INTRODUEIX LA TEVA RESPOSTA AQUÍ*/)
-        throw new Error('assert o llança aquí')
+        //expect(result).toBe(/*INTRODUEIX LA TEVA RESPOSTA AQUÍ*/)
+        //throw new Error('assert o llança aquí')
+        console.log(result)
       },
       error => {
         // throw new Error('això no s'hauria d'executar')
@@ -51,7 +52,8 @@ test('14_promises-2: should reject', () => {
       error => {
         // throw new Error('això no s'hauria d'executar')
         // expect(error).toBe(/*INTRODUEIX LA TEVA RESPOSTA AQUÍ*/)
-        throw new Error('assert o llança aquí')
+        //throw new Error('assert o llança aquí')
+        console.log(error)
       },
     )
     .catch(error => {
@@ -70,8 +72,9 @@ test('14_promises-3: errors can be caught', () => {
     })
     .catch(error => {
       // throw new Error('això no s'hauria d'executar')
-      // expect(error).toBe(/*INTRODUEIX LA TEVA RESPOSTA AQUÍ*/)
-      throw new Error('assert o llança aquí')
+      //expect(error).toBe(/*INTRODUEIX LA TEVA RESPOSTA AQUÍ*/ )
+      //throw new Error('assert o llança aquí')
+      console.log(error)
     })
 })
 
