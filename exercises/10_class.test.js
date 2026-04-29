@@ -58,7 +58,9 @@ test('10_class-4: can have static methods', () => {
       this.name = name;
     }
 
-    static create = new Animal();
+    static create(name){
+      return new Animal(name);
+    }
   }
 
   const animal = new Animal()
