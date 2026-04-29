@@ -1,11 +1,13 @@
-// Exercici 1.3: Callbacks
+import {jest} from '@jest/globals'
 
+// Exercici 1.3: Callbacks
 test('27_callbacks-1: Basic callback - invoke callback passing a number', () => {
   // Crea una funció 'processNumber' que accepti un número i una funció callback
   // La funció ha d'invocar el callback passant-li el número
 
-  const processNumber = (/* AFEGEIX PARÀMETRES AQUÍ */) => {
+  const processNumber = (num, callback) => {
     /* INTRODUEIX EL TEU CODI AQUÍ */
+    return callback(num);
   }
 
   const mockCallback = jest.fn()
@@ -19,8 +21,13 @@ test('27_callbacks-2: Callbacks with mathematical operations - calculator', () =
   // Crea una funció 'calculator' que accepti dos números i una funció callback
   // La funció ha d'invocar el callback amb els dos números com a paràmetres
 
-  const calculator = (/* AFEGEIX PARÀMETRES AQUÍ */) => {
+  const calculator = (num1,num2,operator) => {
     /* INTRODUEIX EL TEU CODI AQUÍ */
+    let result =0;
+    if(operator === sum){
+      result= num1+num2;
+    }
+    return result;
   }
 
   const sum = (a, b) => a + b
@@ -33,8 +40,9 @@ test('27_callbacks-3: Callbacks in asynchronous functions - wait and greet', (do
   // Crea una funció 'waitAndGreet' que accepti un nom i un callback
   // La funció ha d'esperar 2 segons (usa setTimeout) i després invocar el callback amb el nom
 
-  const waitAndGreet = (/* AFEGEIX PARÀMETRES AQUÍ */) => {
+  const waitAndGreet = (name,callback) => {
     /* INTRODUEIX EL TEU CODI AQUÍ */
+    setTimeout(()=>callback(name),2200);
   }
 
   const startTime = Date.now()
@@ -52,8 +60,8 @@ test('27_callbacks-4: Callbacks with arrays - process elements', () => {
   // Crea una funció 'processElements' que accepti un array i un callback
   // La funció ha d'invocar el callback per cada element de l'array
 
-  const processElements = (/* AFEGEIX PARÀMETRES AQUÍ */) => {
-    /* INTRODUEIX EL TEU CODI AQUÍ */
+  const processElements = (array,callback) => {
+    array.forEach(elem => callback(elem))
   }
 
   const elements = ['a', 'b', 'c']
@@ -71,8 +79,10 @@ test('27_callbacks-5: Process string with callback - transform to uppercase', ()
   // La funció ha de convertir la cadena a majúscules i després invocar el callback
   // amb la cadena transformada
 
-  const processString = (/* AFEGEIX PARÀMETRES AQUÍ */) => {
+  const processString = (string,callback) => {
     /* INTRODUEIX EL TEU CODI AQUÍ */
+    const upperString = string.toUpperCase();
+    return callback(upperString);
   }
 
   processString('hola món', (transformedString) => {
@@ -86,10 +96,12 @@ test('27_callbacks-6: Chained callbacks - multiple transformations', () => {
 
   const double = (num, callback) => {
     /* INTRODUEIX EL TEU CODI AQUÍ */
+    return callback(num*2)
   }
 
   const addTen = (num, callback) => {
     /* INTRODUEIX EL TEU CODI AQUÍ */
+    return callback(num+10)
   }
 
   let finalResult
