@@ -1,4 +1,4 @@
-// this is the object we'll be mucking around with and proxying
+// this is the object we'll be mucking around with and proxying 
 const getCharacter = () => {
   return {
     _id: '9RKDLS02580GHCXNZLA0',
@@ -18,9 +18,11 @@ const getCharacter = () => {
   }
 }
 
+const handler = {};
+
 test('22_proxies-1: can wrap an existing object', () => {
   const character = getCharacter()
-  const proxy = character
+  const proxy = new Proxy(character,handler)
   // Comprova que el proxy no és igual referencialment però sí igual profundament a l'objecte original
   expect(proxy).not.toBe(character) // referencialment diferent
   expect(proxy).toEqual(character) // profundament igual
@@ -29,7 +31,46 @@ test('22_proxies-1: can wrap an existing object', () => {
 test('22_proxies-2: handler can intercept gets, sets, and deletes', () => {
   const character = getCharacter()
 
-  const handler = {}
+  const handler = {
+    // GET: Using a loop for path resolution
+    get(target, prop) {
+      const path = prop.split('.');
+      let result = target;
+
+      for (const key of path) {
+        // Use Reflect.get to safely access the property
+        result = Reflect.get(result || {}, key);
+      }
+      return result;
+    },
+
+    // SET: Navigating to the depth and assigning
+    set(target, prop, value) {
+      const path = prop.split('.');
+      let current = target;
+
+      // Navigate to the second-to-last object
+      for (let i = 0; i < path.length - 1; i++) {
+        const key = path[i];
+        if (!current[key]) current[key] = {};
+        current = current[key];
+      }
+
+      // Use Reflect.set for the final assignment
+      return Reflect.set(current, path[path.length - 1], value);
+    },
+
+    // DELETE: Logic for protected vs non-protected properties
+    deleteProperty(target, prop) {
+      // If it starts with _, we "fake" a success without deleting
+      if (prop.startsWith('_' || '#')) {
+        return true; 
+      }
+      // Otherwise, use Reflect to perform the standard deletion
+      return Reflect.deleteProperty(target, prop);
+    }
+  };
+
   const proxy = new Proxy(character, handler)
 
   // Interactua amb el proxy
