@@ -1,4 +1,7 @@
+//Éste ejercicio no funciona
+
 test('21_reflect-1: Reflect.apply can be used to call a function', () => {
+  //Éste ejercicio no funciona
   const person = {
     name: 'Fred',
     sayHi(greeting, noun) {
@@ -6,7 +9,7 @@ test('21_reflect-1: Reflect.apply can be used to call a function', () => {
     },
   }
 
-  const result = null // utilitza Reflect.apply per invocar person.sayHi
+  const result = Reflect.apply(person.sayHi('Hey there','Jaimee')) // utilitza Reflect.apply per invocar person.sayHi
   expect(result).toBe('Hey there Jaimee! My name is Fred')
 })
 
@@ -17,6 +20,7 @@ test('21_reflect-2: Reflect.deleteProperty can be used instead of the `delete` k
     value: 'YOU CANNOT GET RID OF ME!',
   })
   // utilitza Reflect.deleteProperty per eliminar la propietat age de l'objecte person
+  Reflect.deleteProperty(person, 'age')
   const ageDeleted = delete person.age
   const protectedDeleted = delete person.protected
   expect(person.age).not.toBeDefined()
